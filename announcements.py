@@ -13,13 +13,13 @@ def get_url_soup(url):
     return None
 
 # Get list of rows form the announcements table 
-def get_rows(soup):
+def get_rows(soup: BeautifulSoup):
     table = soup.find('table', {"class": "ktu-news"})
     rows = table.find_all('tr')
     return rows
 
 # Get a specific announcement
-def get_announcement(rows_soup, announcement_no : str):
+def get_announcement(rows_soup: BeautifulSoup, announcement_no : str):
     announcement = rows_soup[announcement_no].find_all('td')[1]
 
     # Get the title of the announcement
@@ -34,7 +34,7 @@ def get_announcement(rows_soup, announcement_no : str):
         # Text inside the 'a' tag
         url_text = announcement.find('a').text
     else :
-        print('[X] There is no url for the announcement')
+        print('[X] There is no url for this announcement')
         url = ''
         url_text = ''
 
