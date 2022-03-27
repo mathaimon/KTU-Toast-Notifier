@@ -1,16 +1,5 @@
-import requests
 from bs4 import BeautifulSoup
-
-
-# Get the soup object of the given url
-def get_url_soup(url):
-    try :
-        response = requests.get(url)
-        soup = BeautifulSoup(response.text, 'html.parser')
-        return soup
-    except requests.ConnectionError:
-        print('[X] Connection Refused; Please check Internet connection')
-    return None
+import scraper
 
 # Get list of rows form the announcements table 
 def get_rows(soup: BeautifulSoup):
@@ -49,4 +38,4 @@ def get_announcement(rows_soup: BeautifulSoup, announcement_no : str):
 if __name__ == "__main__":
     url = 'https://ktu.edu.in/eu/core/announcements.htm'
     
-    rows = get_rows(get_url_soup(url))
+    rows = get_rows(scraper.get_url_soup(url))
