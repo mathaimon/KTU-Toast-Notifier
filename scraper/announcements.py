@@ -1,3 +1,4 @@
+# Scraping script for announcements page of KTU
 from bs4 import BeautifulSoup
 import scraper
 
