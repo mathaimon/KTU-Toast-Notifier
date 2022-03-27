@@ -2,14 +2,14 @@
 from bs4 import BeautifulSoup
 import scraper
 
-# Get list of rows form the announcements table 
 def get_rows(soup: BeautifulSoup):
+    """Get list of rows from the announcements table"""
     table = soup.find('table', {"class": "ktu-news"})
     rows = table.find_all('tr')
     return rows
 
-# Get a specific announcement
 def get_announcement(rows_soup: BeautifulSoup, announcement_no : str):
+    """"Get a specific announcement"""
     announcement = rows_soup[announcement_no].find_all('td')[1]
 
     # Get the title of the announcement
