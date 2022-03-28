@@ -1,7 +1,7 @@
 # Scraping script for announcements page of KTU
 from bs4 import BeautifulSoup
 
-def get_rows(soup: BeautifulSoup):
+def get_annoucement_rows(soup: BeautifulSoup):
     """Get list of rows from the announcements table"""
     table = soup.find('table', {"class": "ktu-news"})
     rows = table.find_all('tr')
@@ -18,7 +18,7 @@ def get_announcement(rows_soup: BeautifulSoup, announcement_no : str):
     if announcement.find('a'):
         url = announcement.find('a').get('href')
         # Remove tabs and spaces in the url and add the url prefix
-        url = 'https://ktu.edu.in' + url.replace('\t','').replace('\r','').replace(' ', '')
+        url = 'https://ktu.edu.in' + url.replace('\t','').replace('\r','').replace('\n','').replace(' ', '')
 
         # Text inside the 'a' tag
         url_text = announcement.find('a').text
@@ -28,7 +28,7 @@ def get_announcement(rows_soup: BeautifulSoup, announcement_no : str):
         url_text = ''
 
     # Get the description text
-    description = announcement.find('li').text
+    description = announcement.find('li').text.replace('\n', ' ')
     # Remove the title string and the url text string to get the description
     description = description.replace(title, '').replace(url_text, '').strip()
     
