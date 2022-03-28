@@ -1,6 +1,5 @@
 # Scraping script for announcements page of KTU
 from bs4 import BeautifulSoup
-import scraper
 
 def get_rows(soup: BeautifulSoup):
     """Get list of rows from the announcements table"""
@@ -34,9 +33,3 @@ def get_announcement(rows_soup: BeautifulSoup, announcement_no : str):
     description = description.replace(title, '').replace(url_text, '').strip()
     
     return title, description, url
-
-
-if __name__ == "__main__":
-    url = 'https://ktu.edu.in/eu/core/announcements.htm'
-    
-    rows = get_rows(scraper.get_url_soup(url))
