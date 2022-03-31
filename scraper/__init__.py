@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 
 
-def get_url_soup(url):
+def get_url_soup(url: str):
     """Get the soup object of the given url"""
     try :
         response = requests.get(url)
