@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 def get_url_soup(url: str):
     """Get the soup object of the given url"""
     try :
-        print("[+] Getting url soup")
+        print("[+] Getting url soup for :",url)
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
         return soup
