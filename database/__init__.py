@@ -44,3 +44,8 @@ def update_notified(announcement_query : Query):
     }
     db.update(update_data, announcement_query)
 
+def get_query(announcement_title: str) -> Query:
+    """Get the announcement with announcement title"""
+    for announcement in db.all():
+        if announcement["title"] == announcement_title:
+            return announcement        
