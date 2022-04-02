@@ -2,7 +2,7 @@
 from bs4 import BeautifulSoup
 
 
-def get_announcement_section(soup: BeautifulSoup -> BeautifulSoup):
+def get_announcement_section(soup: BeautifulSoup)-> BeautifulSoup:
     """Get list of announcements form announcements section"""
     table = soup.find('ul', {"class": "annuncement"})
     announcements = table.find_all('li')
