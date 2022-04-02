@@ -1,13 +1,14 @@
 # Scraping script for announcements page of KTU
+from typing import Tuple
 from bs4 import BeautifulSoup
 
-def get_annoucement_rows(soup: BeautifulSoup):
+def get_annoucement_rows(soup: BeautifulSoup) -> BeautifulSoup:
     """Get list of rows from the announcements table"""
     table = soup.find('table', {"class": "ktu-news"})
     rows = table.find_all('tr')
     return rows
 
-def get_announcement(rows_soup: BeautifulSoup, announcement_no : str):
+def get_announcement(rows_soup: BeautifulSoup, announcement_no : str) -> Tuple[str, str, str]:
     """"Get a specific announcement"""
     announcement = rows_soup[announcement_no].find_all('td')[1]
 
