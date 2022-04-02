@@ -12,7 +12,7 @@ def show_toast(title: str, description: str, url: str):
         title= title,
         msg= description,
         icon_path= "ktulogo.ico",
-        duration=3,
+        duration=2,
         callback_on_click= lambda: open_browser(url)
     )
 
