@@ -11,6 +11,7 @@ def show_toast(title: str, description: str, url: str):
     toaster.show_toast(
         title= title,
         msg= description,
+        icon_path= "ktulogo.ico",
         duration=3,
         callback_on_click= lambda: open_browser(url)
     )
