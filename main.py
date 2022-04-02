@@ -49,12 +49,14 @@ def show_toast_notifications():
     for announcement in un_notified_announcements:
         # show toast notification
         try:
+            # Printing debug info and first 40 characters of announcement
+            print(f"[+] Showing Toast Notification \n \t {announcement['title'][:40]} .....")
+
             toast.show_toast(
                 title= announcement['title'],
                 description= announcement['description'],
                 url = announcement['url']
             )
-            print("[+] Showing Toast Notification")
 
             # update the database on the notification showed status
             database.update_notified(database.get_query(announcement["title"]))
@@ -68,7 +70,10 @@ if __name__ == "__main__":
     ## Exit program if no updates are found
     if check_new_announcement() == True:
         print("[+] No new announcements found")
+        show_toast_notifications()
+
         sys.exit()
+
     print("[+] New announcements found")
     
     get_new_announcement()
