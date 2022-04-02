@@ -9,11 +9,12 @@ def show_toast(title: str, description: str, url: str):
     """Show toast notification with the given title and description and also take to webpage when clicked on the notification"""
 
     toaster.show_toast(
-        title= title,
-        msg= description,
+        # The parameters should be non empty else the function holds indefinitely
+        title= title if len(title)>0 else " ",
+        msg= description if len(description)>0 else " ",
         icon_path= "ktulogo.ico",
         duration=2,
-        callback_on_click= lambda: open_browser(url)
+        callback_on_click= lambda: open_browser(url if len(url)>0 else " ")
     )
 
 
