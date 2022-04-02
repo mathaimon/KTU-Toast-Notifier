@@ -1,3 +1,5 @@
+from typing import List
+from xml.dom.minidom import Document
 from tinydb import TinyDB, Query
 import datetime
 
@@ -51,3 +53,7 @@ def update_notified(announcement_query : Query):
 def get_query(announcement_title: str) -> Query:
     """Get the announcement with announcement title"""
     return Announcement.title == announcement_title
+
+def unnotified_announcements() -> List[Document]:
+    """Get list of Un-notified announcements"""
+    return db.search(Announcement.is_notified == False)
