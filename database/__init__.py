@@ -44,7 +44,3 @@ def update_notified(announcement_query : Query):
     }
     db.update(update_data, announcement_query)
 
-def get_notified_status(announcement_index: int) -> bool:
-    """Get the 'is_notified' status of the announcement with the given announcement index"""
-    return db.all()[announcement_index]["is_notified"]
-
