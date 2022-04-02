@@ -1,3 +1,4 @@
+import sys
 import requests
 from bs4 import BeautifulSoup
 
@@ -10,4 +11,4 @@ def get_url_soup(url: str):
         return soup
     except requests.ConnectionError:
         print('[X] Connection Refused; Please check Internet connection')
-    return None
+        sys.exit()
