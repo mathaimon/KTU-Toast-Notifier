@@ -12,9 +12,10 @@ def check_new_announcement() -> bool:
     landing_url = "https://ktu.edu.in/home.htm"
 
     landing_soup = landing.get_announcement_section(scraper.get_url_soup(landing_url))
+    print("[+] Landing page scraped")
 
     # Get the last announcement title from the announcement list
-    last_announcement = landing.get_announcement(landing_soup,0)
+    last_announcement = landing.get_announcement(landing_soup, 0)
 
     return database.check_exists(last_announcement)
 
@@ -25,6 +26,7 @@ def get_new_announcement():
     announcements_url = "https://ktu.edu.in/eu/core/announcements.htm"
     
     announcement_soup = announcements.get_annoucement_rows(scraper.get_url_soup(announcements_url))
+    print("[+] Announcements page scraped")
 
     for i in range(5):
         title, description, url = announcements.get_announcement(announcement_soup, i)
@@ -37,22 +39,37 @@ def get_new_announcement():
                 description= description,
                 url = url
             )
+            print("[+] Added new  announcement to database")
 
-            # show toast notification
+
+
+def show_toast_notifications():
+    """Show toast notifications for un-notified announcements in the database"""
+    un_notified_announcements = database.unnotified_announcements()
+    for announcement in un_notified_announcements:
+        # show toast notification
+        try:
             toast.show_toast(
-                title= title,
-                description= description,
-                url = url
+                title= announcement['title'],
+                description= announcement['description'],
+                url = announcement['url']
             )
+            print("[+] Showing Toast Notification")
 
             # update the database on the notification showed status
-            database.update_notified(database.get_query(title))
+            database.update_notified(database.get_query(announcement["title"]))
+            print("[+] Updating database on notified status")
+        except:
+            print("[+] Failed to show Toast Notification")
+    
 
 
 if __name__ == "__main__":
     ## Exit program if no updates are found
-    if not check_new_announcement():
+    if check_new_announcement() == True:
         print("[+] No new announcements found")
         sys.exit()
-
+    print("[+] New announcements found")
     
+    get_new_announcement()
+    show_toast_notifications()
