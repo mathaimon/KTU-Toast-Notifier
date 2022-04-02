@@ -3,6 +3,7 @@ import sys
 import scraper
 import database
 from scraper import landing, announcements
+import toast
 
 
 def check_new_announcement() -> bool:
@@ -28,12 +29,24 @@ def get_new_announcement():
     for i in range(5):
         title, description, url = announcements.get_announcement(announcement_soup, i)
 
+        # Check if announcement exist in the database
         if not database.check_exists(title):
+            # add announcement to the database
             database.add_announcement(
                 title= title,
                 description= description,
                 url = url
             )
+
+            # show toast notification
+            toast.show_toast(
+                title= title,
+                description= description,
+                url = url
+            )
+
+            # update the database on the notification showed status
+            database.update_notified(database.get_query(title))
 
 
 if __name__ == "__main__":
@@ -41,3 +54,5 @@ if __name__ == "__main__":
     if not check_new_announcement():
         print("[+] No new announcements found")
         sys.exit()
+
+    
