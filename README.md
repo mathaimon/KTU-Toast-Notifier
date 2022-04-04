@@ -28,5 +28,6 @@ Now run the program using the following command :
 ```
 git clone https://github.com/cyberdog-m/KTU-Toast-Notifier.git
 cd KTU-Toast-Notifier
+pipenv install
 pipenv run main.py
 ```
