@@ -1,3 +1,5 @@
+> This repository is no longer maintained.
+
 # KTU Toast Notifier
 
 An app to display **Windows Toast Notification** for new [APJAKTU](https://ktu.edu.in/home.htm) announcements . The data is scraped from the official KTU webpage.
